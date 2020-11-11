@@ -60,6 +60,12 @@ function render() {
         ctx.rect( 0, 0, canvasWidth, canvasHeight )
         ctx.fill()
 
+        ctx.strokeStyle = "gray"
+        ctx.beginPath()
+        ctx.moveTo( 0, canvasHeight / 2 )
+        ctx.lineTo( canvasWidth, canvasHeight / 2 )
+        ctx.stroke()
+
         ctx.translate( 0, canvasHeight / 2 )
         wavePath( ctx, wave, "re" )
         ctx.strokeStyle = "blue"
@@ -67,7 +73,9 @@ function render() {
         wavePath( ctx, wave, "im" )
         ctx.strokeStyle = "red"
         ctx.stroke()
-
+        magnitudePath( ctx, wave, -1 )
+        ctx.strokeStyle = "black"
+        ctx.stroke()
     }
     ctx.restore()
 }
@@ -77,7 +85,18 @@ function wavePath( ctx, wave, component ) {
     ctx.moveTo( 0, 0 )
     for ( let i = 0; i < resolution; i++ ) {
         let x = i * dx
-        y = wave[ i ][ component ]
+        y = -wave[ i ][ component ]
+        ctx.lineTo( x, y )
+    }
+}
+
+function magnitudePath( ctx, wave ) {
+    ctx.beginPath()
+    ctx.moveTo( 0, 0 )
+    for ( let i = 0; i < resolution; i++ ) {
+        let x = i * dx
+        let v = wave[ i ]
+        y = - Math.sqrt( v.re ** 2 + v.im ** 2 )
         ctx.lineTo( x, y )
     }
 }
