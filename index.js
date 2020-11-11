@@ -35,7 +35,7 @@ let wave = []
 { // Setup wavelet.
     for ( let i = 0; i < resolution; i++ ) {
         let x = i * dx
-        let x2 = x - canvasWidth / 8
+        let x2 = x - canvasWidth * 5 / 6
         let modulation = Math.exp( -( ( x2 / sigma ) ** 2 ) )
         wave.push( {
             re: Math.cos( x2 * freq ) * amplitude * modulation,
@@ -106,9 +106,9 @@ function clamp( low, high, x ) {
 }
 
 function get( wave, i ) {
-    // i = clamp( 0, wave.length - 1, i )
-    if ( i >= wave.length ) i = 0
-    if ( i < 0 ) i = wave.length - 1
+    i = clamp( 0, wave.length - 1, i )
+    // if ( i >= wave.length ) i = 0
+    // if ( i < 0 ) i = wave.length - 1
     return wave[ i ]
 }
 
