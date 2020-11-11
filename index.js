@@ -24,25 +24,25 @@ function loop() {
 }
 // END BOILER PLATE
 
-let freq = 1 / 10
-let amplitude = 100
-let sigma = 50
+let freq = 1 / 8
+let amplitude = 1
+let sigma = 100
 let resolution = 200
 let hBarOver2m = 0.5
 let dx = canvasWidth / ( resolution - 1 )
-let dt = 0.01
+let dt = 0.02
 let wave = []
 { // Setup wavelet.
     for ( let i = 0; i < resolution; i++ ) {
         let x = i * dx
-        let x2 = x - canvasWidth * 5 / 6
+        let x2 = x - canvasWidth / 2
         let modulation = Math.exp( -( ( x2 / sigma ) ** 2 ) )
         wave.push( {
             re: Math.cos( x2 * freq ) * amplitude * modulation,
             im: Math.sin( x2 * freq ) * amplitude * modulation
         } )
     }
-    normalizeWave( 1e6 )
+    normalizeWave( 0.5e6 )
 }
 let dWave = []
 { // Setup initial derivatives of wave.
