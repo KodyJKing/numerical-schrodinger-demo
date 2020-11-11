@@ -131,7 +131,6 @@ function update() {
         let dv = dWave[ i ]
         v.re += dv.re * dt
         v.im += dv.im * dt
-        wave[ i ] = v
     }
 }
 
