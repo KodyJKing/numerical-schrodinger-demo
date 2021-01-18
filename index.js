@@ -106,7 +106,8 @@ function clamp( low, high, x ) {
 }
 
 function get( wave, i ) {
-    i = clamp( 0, wave.length - 1, i )
+    if ( i < 0 || i >= wave.length ) return { re: 0, im: 0 }
+    // i = clamp( 0, wave.length - 1, i )
     // if ( i >= wave.length ) i = 0
     // if ( i < 0 ) i = wave.length - 1
     return wave[ i ]
